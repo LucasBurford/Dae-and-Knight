@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
-    // Store reference to light
-    public Light light;
+    #region Members
+    [Header("Gameplay")]
+
+    // Store reference to mainLight
+    public Light2D mainLight;
 
     // Enum to store game state, night or day
     public enum GameState
@@ -15,18 +19,18 @@ public class GameManager : MonoBehaviour
     }
     // Access enum
     public GameState gameState;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         // Initialise the game state to night, as we start out as the knight
-        gameState = GameState.Night;
+        gameState = GameState.Day;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Call CheckState to check states every frame
         CheckState();
     }
 
@@ -35,14 +39,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public GameState CheckState()
     {
-        // If state is day, keep light on
+        // If state is day, keep mainLight on
         if (gameState == GameState.Day)
         {
-            light.enabled = true;
+            mainLight.enabled = true;
         }
         else
         {
-            light.enabled = false;
+            mainLight.enabled = false;
         }
 
         return gameState;
